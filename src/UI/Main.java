@@ -32,11 +32,10 @@ public class Main {
         topPanel.add(scrollPane, BorderLayout.CENTER);
 
         LoadFileButton loadFileButton = new LoadFileButton("Wczytaj plik");
-        JButton delButton = new JButton("Analizuj");
+        AnalyzeButton analyzeButton = new AnalyzeButton("Analizuj");
 
         btnPanel.add(loadFileButton);
-        btnPanel.add(delButton);
-
+        btnPanel.add(analyzeButton);
         frame.setVisible(true);
     }
 }
