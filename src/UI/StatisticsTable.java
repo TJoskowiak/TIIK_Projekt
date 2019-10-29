@@ -7,7 +7,9 @@ import javax.swing.table.DefaultTableModel;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -52,18 +54,20 @@ public class StatisticsTable extends JTable {
         Map<Character, TableRow> tableRows = new HashMap<>();
 
         try {
-            BufferedReader br = Files.newBufferedReader(analyzedFile.toPath());
-            int character;
+            String text = new String(Files.readAllBytes(analyzedFile.toPath()), StandardCharsets.UTF_8);
+            text = text.replaceAll("\\s+","");
+            char[] charText = text.toCharArray();
             int charSum = 0;
-            while ((character = br.read()) != (-1)) {
 
-                char key = (char)character;
-                if(!tableRows.containsKey(key))
-                    tableRows.put(key, new TableRow(key));
-                tableRows.get(key).amount++;
+            for (char character : charText) {
+                if(!tableRows.containsKey(character))
+                    tableRows.put(character, new TableRow(character));
+                tableRows.get(character).amount++;
                 charSum++;
             }
             calculateRows(tableRows.values(),charSum);
+
+
             
         } catch (IOException ex) {
             Logger.getLogger(LoadFileButton.class.getName()).log(Level.SEVERE, null, ex);
