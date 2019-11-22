@@ -2,25 +2,27 @@ package UI;
 
 import Crypto.TableRow;
 
-import javax.swing.*;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import java.io.BufferedReader;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.Paths;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Vector;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import java.text.DecimalFormat;
 
 public class StatisticsTable extends JTable {
     public static File analyzedFile;
     private static DefaultTableModel model;
-
+    public static EntropyLabel entropyLabel;
     public StatisticsTable() {
         String[] column = {"Znak", "Ilość wystąpień", "Prawdopodobieństwo", "Ilość informacji"};
 
@@ -40,11 +42,14 @@ public class StatisticsTable extends JTable {
     }
 
     private static void calculateRows(Collection<TableRow> rows, float numberOfChars) {
+        double currentValue = 0;
         for (TableRow row : rows) {
             row.calculateProbability(numberOfChars);
             row.calculateWorth();
             model.addRow(row.getRow());
+            currentValue += row.worth * (double) row.probability;
         }
+        entropyLabel.updateLabel( new DecimalFormat("#.###").format(currentValue));
     }
 
     public static void getRows() {
@@ -55,7 +60,7 @@ public class StatisticsTable extends JTable {
 
         try {
             String text = new String(Files.readAllBytes(analyzedFile.toPath()), StandardCharsets.UTF_8);
-            text = text.replaceAll("\\s+","");
+            //text = text.replaceAll("\\s+","");
             char[] charText = text.toCharArray();
             int charSum = 0;
 
