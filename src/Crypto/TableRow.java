@@ -1,12 +1,12 @@
 package Crypto;
 
 public class TableRow {
-    public char character;
+    public String character;
     public int amount;
     public float probability;
     public double worth;
 
-    public TableRow(char character, int amount, float probability, double worth)
+    public TableRow(String character, int amount, float probability, double worth)
     {
         this.character = character;
         this.amount = amount;
@@ -14,7 +14,7 @@ public class TableRow {
         this.worth = worth;
     }
 
-    public TableRow(char character)
+    public TableRow(String character)
     {
         this.character = character;
         this.amount = 0;

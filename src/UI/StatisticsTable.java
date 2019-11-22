@@ -19,6 +19,8 @@ import java.util.logging.Logger;
 
 import java.text.DecimalFormat;
 
+
+
 public class StatisticsTable extends JTable {
     public static File analyzedFile;
     private static DefaultTableModel model;
@@ -41,10 +43,10 @@ public class StatisticsTable extends JTable {
         return false;
     }
 
-    private static void calculateRows(Collection<TableRow> rows, float numberOfChars) {
+    private static void calculateRows(Collection<TableRow> rows, float numberOfStrings) {
         double currentValue = 0;
         for (TableRow row : rows) {
-            row.calculateProbability(numberOfChars);
+            row.calculateProbability(numberOfStrings);
             row.calculateWorth();
             model.addRow(row.getRow());
             currentValue += row.worth * (double) row.probability;
@@ -56,7 +58,7 @@ public class StatisticsTable extends JTable {
         if(analyzedFile == null)
             return;
         model.setRowCount(0);
-        Map<Character, TableRow> tableRows = new HashMap<>();
+        Map<String, TableRow> tableRows = new HashMap<>();
 
         try {
             String text = new String(Files.readAllBytes(analyzedFile.toPath()), StandardCharsets.UTF_8);
@@ -65,9 +67,15 @@ public class StatisticsTable extends JTable {
             int charSum = 0;
 
             for (char character : charText) {
-                if(!tableRows.containsKey(character))
-                    tableRows.put(character, new TableRow(character));
-                tableRows.get(character).amount++;
+                String singleValue = String.valueOf(character);
+                if(singleValue.contains("\n") || singleValue.contains("\t") || singleValue.contains("\r")){
+                    singleValue = singleValue.replace("\n","\\n");
+                    singleValue = singleValue.replace("\t","\\t");
+                    singleValue = singleValue.replace("\r","\\r");
+                }
+                if(!tableRows.containsKey(singleValue))
+                    tableRows.put(singleValue, new TableRow(singleValue));
+                tableRows.get(singleValue).amount++;
                 charSum++;
             }
             calculateRows(tableRows.values(),charSum);
@@ -78,4 +86,5 @@ public class StatisticsTable extends JTable {
             Logger.getLogger(LoadFileButton.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
 }
