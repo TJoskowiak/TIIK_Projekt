@@ -1,5 +1,8 @@
 package Crypto;
 
+
+import java.text.DecimalFormat;
+
 public class TableRow {
     public String character;
     public int amount;
@@ -24,7 +27,7 @@ public class TableRow {
 
     public Object[] getRow()
     {
-        return new Object[]{character,amount,probability,worth};
+        return new Object[]{character,amount,new DecimalFormat("#.##").format(probability),new DecimalFormat("#.##").format(worth)};
     }
 
     public void calculateProbability(float charNumberInFile){
