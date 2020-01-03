@@ -22,9 +22,11 @@ import java.text.DecimalFormat;
 
 
 public class StatisticsTable extends JTable {
+
     public static File analyzedFile;
     private static DefaultTableModel model;
     public static EntropyLabel entropyLabel;
+
     public StatisticsTable() {
         String[] column = {"Znak", "Ilość wystąpień", "Prawdopodobieństwo", "Ilość informacji"};
 
@@ -51,7 +53,7 @@ public class StatisticsTable extends JTable {
             model.addRow(row.getRow());
             currentValue += row.worth * (double) row.probability;
         }
-        entropyLabel.updateLabel( new DecimalFormat("#.###").format(currentValue));
+        entropyLabel.updateLabel( new DecimalFormat("#.##").format(currentValue));
     }
 
     public static void getRows() {

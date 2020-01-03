@@ -1,8 +1,8 @@
 package UI;
 
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+        import javax.swing.*;
+        import java.awt.event.ActionEvent;
+        import java.awt.event.ActionListener;
 
 public class AnalyzeButton extends JButton implements ActionListener{
 

@@ -19,7 +19,7 @@ public class LoadFileButton extends JButton implements ActionListener {
     @Override
     public void actionPerformed (ActionEvent aEvent) {
         JFileChooser fileChooser = new JFileChooser();
-        FileNameExtensionFilter filter = new FileNameExtensionFilter ( "text files " , "txt");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter ( "text files " ,"txt");
 
         fileChooser.setFileFilter(filter);
         int returnValue = fileChooser.showOpenDialog(null);
@@ -27,13 +27,6 @@ public class LoadFileButton extends JButton implements ActionListener {
         if (returnValue == JFileChooser.APPROVE_OPTION)
         {
             StatisticsTable.analyzedFile = fileChooser.getSelectedFile();
-            LZ77 lz = new LZ77();
-            try {
-                lz.compress(fileChooser.getSelectedFile().toString());
-                lz.unCompress(fileChooser.getSelectedFile().toString());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
     }
 }

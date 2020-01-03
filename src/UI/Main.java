@@ -24,11 +24,11 @@ public class Main {
 
         JPanel topPanel = new JPanel();
         JPanel btnPanel = new JPanel();
-        JPanel entropyPanel = new JPanel();
+        JPanel labelPanel = new JPanel();
 
         topPanel.setLayout(new BorderLayout());
         frame.getContentPane().add(topPanel, BorderLayout.CENTER);
-        frame.getContentPane().add(entropyPanel, BorderLayout.NORTH);
+        frame.getContentPane().add(labelPanel, BorderLayout.NORTH);
         frame.getContentPane().add(btnPanel, BorderLayout.SOUTH);
 
         JScrollPane scrollPane = new JScrollPane(st);
@@ -36,12 +36,23 @@ public class Main {
 
         LoadFileButton loadFileButton = new LoadFileButton("Wczytaj plik");
         AnalyzeButton analyzeButton = new AnalyzeButton("Analizuj");
-        EntropyLabel entropyLabel = new EntropyLabel();
-        StatisticsTable.entropyLabel = entropyLabel;
+        CompressButton compressButton = new CompressButton("Kompresuj");
+        DecompressButton decompressButton = new DecompressButton("Dekompresuj");
 
-        entropyPanel.add(entropyLabel);
+        EntropyLabel entropyLabel = new EntropyLabel();
+        CompressionLevelLabel compressionLevelLabel = new CompressionLevelLabel();
+
+        StatisticsTable.entropyLabel = entropyLabel;
+        CompressButton.compressionLevelLabel = compressionLevelLabel;
+
+        labelPanel.add(entropyLabel);
+        labelPanel.add(compressionLevelLabel);
+
         btnPanel.add(loadFileButton);
         btnPanel.add(analyzeButton);
+        btnPanel.add(compressButton);
+        btnPanel.add(decompressButton);
+
 
         frame.setVisible(true);
     }

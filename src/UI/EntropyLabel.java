@@ -5,11 +5,11 @@ import javax.swing.JLabel;
 
 public class EntropyLabel extends JLabel {
     public EntropyLabel() {
-        super("Entropy: ");
+        super("Entropia: ");
     }
 
     public void updateLabel(String labelText){
-        this.setText("Entropy: " + labelText);
+        this.setText("Entropia: " + labelText);
     }
 
 }
