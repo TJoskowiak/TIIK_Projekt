@@ -1,6 +1,7 @@
 package UI;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 
 public class Main {
@@ -17,10 +18,15 @@ public class Main {
 
         JFrame frame = new JFrame("TiIK");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(600, 600);
+        frame.setSize(800, 800);
         frame.setResizable(false);
+        Border blackLine = BorderFactory.createLineBorder(Color.black);
 
         StatisticsTable st = new StatisticsTable();
+
+        JTextArea fileArea = new JTextArea(18, 1);
+        fileArea.setEditable(false);
+
 
         JPanel topPanel = new JPanel();
         JPanel btnPanel = new JPanel();
@@ -31,8 +37,13 @@ public class Main {
         frame.getContentPane().add(labelPanel, BorderLayout.NORTH);
         frame.getContentPane().add(btnPanel, BorderLayout.SOUTH);
 
-        JScrollPane scrollPane = new JScrollPane(st);
-        topPanel.add(scrollPane, BorderLayout.CENTER);
+        JScrollPane statisticsScrollPane = new JScrollPane(st);
+        JScrollPane fileScrollPane = new JScrollPane(fileArea);
+        statisticsScrollPane.setBorder(blackLine);
+        fileScrollPane.setBorder(blackLine);
+
+        topPanel.add(statisticsScrollPane, BorderLayout.NORTH);
+        topPanel.add(fileScrollPane, BorderLayout.SOUTH);
 
         LoadFileButton loadFileButton = new LoadFileButton("Wczytaj plik");
         AnalyzeButton analyzeButton = new AnalyzeButton("Analizuj");
@@ -44,6 +55,7 @@ public class Main {
 
         StatisticsTable.entropyLabel = entropyLabel;
         CompressButton.compressionLevelLabel = compressionLevelLabel;
+        LoadFileButton.fileArea = fileArea;
 
         labelPanel.add(entropyLabel);
         labelPanel.add(compressionLevelLabel);
