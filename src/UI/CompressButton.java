@@ -36,6 +36,6 @@ public class CompressButton extends JButton implements ActionListener {
             exception.printStackTrace();
         }
 
-
+JOptionPane.showMessageDialog(null, "Kompresja zakończona.");
     }
 }

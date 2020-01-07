@@ -27,7 +27,6 @@ public class Main {
         JTextArea fileArea = new JTextArea(18, 1);
         fileArea.setEditable(false);
 
-
         JPanel topPanel = new JPanel();
         JPanel btnPanel = new JPanel();
         JPanel labelPanel = new JPanel();

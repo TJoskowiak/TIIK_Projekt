@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class DecompressButton extends JButton implements ActionListener {
-
     public DecompressButton(String text){
         super(text);
         addActionListener(this);
@@ -22,5 +21,7 @@ public class DecompressButton extends JButton implements ActionListener {
         } catch (IOException exception) {
             exception.printStackTrace();
         }
+    
+         JOptionPane.showMessageDialog(null, "Dekompresja zakończona.");
     }
 }
